@@ -8,7 +8,6 @@ export class ProductsController {
 
   @Post()
   addProduct(@Body() data: any): any {
-    console.log(data);
-    //   this.productsService.insert();
+    this.productsService.insert(data);
   }
 }

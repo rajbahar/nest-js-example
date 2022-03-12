@@ -1,14 +1,18 @@
 import { Injectable } from '@nestjs/common';
-
-// import { Product } from './product.model';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Rook, BookDocument } from './product.model';
 
 @Injectable()
 export class ProductsService {
-//   products: Product[] = [];
+  constructor(
+    @InjectModel(Rook.name) private productModel: Model<BookDocument>,
+  ) {}
 
-  insert(title: string, desc: string, price: string) {
-    // const newpord = new Product(new Date().toString(), title, desc, price);
+  async insert(data) {
+    const newprod = new this.productModel(data);
 
-    // this.products.push(newpord);
+    const result = await newprod.save();
+    console.log(result);
   }
 }
